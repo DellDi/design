@@ -53,7 +53,7 @@
 3. 前端实现时，可从 `tokens/` 读取颜色、背景、边框和文字变量。
 4. 使用 AI 生成 PC 页面时，先引用 `prompts/pc-design-prompt.md`，再补充具体业务需求。
 5. 使用 AI 生成移动端页面时，先引用 `prompts/mobile-design-prompt.md`，再补充具体业务需求。
-6. 生成静态 HTML 或设计素材时，优先引入 `dist/` 中的编译 CSS，并使用语义类控制视觉一致性。
+6. 生成静态 HTML 或设计素材时，默认同时引入 Tailwind Play CDN 和 `dist/` 编译 CSS。
 7. 工程化项目需要二次构建时，再引入 `styles/` 中的 Tailwind v4 源文件。
 8. 可从 `examples/` 复制最小 HTML 模板开始设计。
 9. 具体业务设计资源放入 `resources/<端类型>/<业务域>/`，不要直接放在项目根目录。
@@ -66,8 +66,9 @@
 - `examples/` 只放通用最小模板，不放具体业务页面。
 - 新增内容先判断是否适用于长期复用，避免把一次性页面需求写入标准。
 - token 命名保持稳定，必要变更需要说明兼容影响。
-- `dist/` 是静态 HTML 设计稿默认入口，`styles/` 是 Tailwind v4 源文件入口。
+- 静态 HTML 设计稿默认使用 Tailwind Play CDN + `dist/` 双入口。
+- `dist/` 提供标准语义组件，Tailwind CDN 提供临时布局、间距和状态 utility。
 - Tailwind 样式层服务于规范落地，不替代 `DESIGN.md` 和 `MOBILE_DESIGN.md`。
-- 生成 HTML 时优先使用 `dist/` 中编译出的语义类，Tailwind utility 只做少量局部微调。
+- 生成 HTML 时优先使用 `dist/` 中编译出的语义类；默认语义类无法覆盖时，优先补 Tailwind utility class，不优先写新的内联 CSS。
 - 大屏视觉与常规后台视觉分域管理，不强行合并变量。
 - PC 与移动端视觉分域管理，不互相套用页面结构和组件密度。

@@ -29,6 +29,12 @@ resources/
   - `album-ui.html`：主页面静态原型。
   - `dialogs.html`：弹窗状态静态原型。
   - `model-notes.md`：三表模型、标签体系和操作规则说明。
+- `mobile/quality-cockpit/`：品质模块移动端驾驶舱设计资源。
+  - `README.md`：资源说明、页面清单和指标口径。
+  - `index.html`：品质驾驶舱主页面静态原型。
+  - `completion-detail.html`：巡检完成情况详情页静态原型。
+  - `rectification-detail.html`：整改闭环情况详情页静态原型。
+  - `quality-cockpit.css`：品质驾驶舱局部样式。
 
 ## 静态 HTML 样式引用
 
@@ -37,11 +43,20 @@ resources/
 PC 业务资源示例：
 
 ```html
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <link rel="stylesheet" href="../../../dist/pc-design.css">
 ```
 
 移动端业务资源示例：
 
 ```html
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <link rel="stylesheet" href="../../../dist/mobile-design.css">
 ```
+
+## 自定义样式规则
+
+- 优先使用标准语义类，例如 `.pc-card`、`.mobile-list-card`。
+- 语义类无法覆盖时，优先使用 Tailwind utility class。
+- 不优先新增页面内 `<style>`。
+- 如果多个资源反复需要同一组样式，应回收沉淀到 `styles/` 和 `dist/`。

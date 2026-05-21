@@ -1,0 +1,142 @@
+:root {
+  --quality-shell: #eef3fa;
+  --quality-blue-soft: #ddebff;
+  --quality-purple-soft: #ece9ff;
+  --quality-panel: #f3f6fa;
+  --quality-line: #e6ebf2;
+  --quality-shadow: 0 8px 22px rgba(31, 45, 71, .08);
+}
+
+/* 1. 复杂几何渐变头部 */
+.top-hero {
+  position: relative;
+  min-height: 168px;
+  overflow: hidden;
+  border-radius: 0 0 22px 22px;
+  padding: 36px 18px 18px;
+  background:
+    radial-gradient(circle at 84% 34%, rgba(22, 119, 255, .2) 0 52px, transparent 53px),
+    linear-gradient(135deg, #c7e4ff 0%, #e8f4ff 64%, #b8d8fb 100%);
+}
+
+.top-hero::after {
+  content: "";
+  position: absolute;
+  right: 24px;
+  bottom: -10px;
+  width: 142px;
+  height: 124px;
+  border-radius: 54% 46% 40% 60%;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, .82), rgba(181, 214, 255, .36)),
+    repeating-linear-gradient(0deg, transparent 0 12px, rgba(22, 119, 255, .28) 13px 15px);
+  box-shadow: 0 18px 34px rgba(22, 119, 255, .22);
+  transform: rotate(8deg);
+}
+
+/* 2. 悬浮月份侧边切换 (精密定位计算) */
+.day-switch {
+  position: fixed;
+  top: 214px;
+  z-index: 5;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  min-height: 92px;
+  border-radius: 0 22px 22px 0;
+  color: var(--color-mobile-text-secondary);
+  background: rgba(217, 224, 232, .92);
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.day-switch.right {
+  right: max(0px, calc((100vw - 430px) / 2));
+  border-radius: 22px 0 0 22px;
+}
+
+.day-switch.left {
+  left: max(0px, calc((100vw - 430px) / 2));
+}
+
+/* 3. 聚光灯卡片图形特效 */
+.spotlight::after {
+  content: "";
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  width: 76px;
+  height: 70px;
+  border-radius: 50% 44% 52% 48%;
+  background:
+    radial-gradient(circle at 36% 30%, rgba(255, 255, 255, .75) 0 12px, transparent 13px),
+    linear-gradient(135deg, rgba(22, 119, 255, .22), rgba(22, 119, 255, .54));
+  transform: rotate(-18deg);
+}
+
+.spotlight.purple::after {
+  background:
+    radial-gradient(circle at 36% 30%, rgba(255, 255, 255, .75) 0 12px, transparent 13px),
+    linear-gradient(135deg, rgba(120, 94, 255, .22), rgba(120, 94, 255, .54));
+}
+
+/* 4. 折线图背景格栅与剪裁遮罩 */
+.trend-chart {
+  position: relative;
+  height: 240px;
+  padding: 12px 18px 24px 36px;
+}
+
+.trend-chart::before {
+  content: "";
+  position: absolute;
+  inset: 16px 20px 38px 42px;
+  background:
+    linear-gradient(to bottom, transparent 0 24%, rgba(31, 41, 55, .06) 24.5% 25%, transparent 25.5% 49%, rgba(31, 41, 55, .06) 49.5% 50%, transparent 50.5% 74%, rgba(31, 41, 55, .06) 74.5% 75%, transparent 75.5%),
+    linear-gradient(180deg, rgba(88, 141, 255, .24), rgba(88, 141, 255, .02));
+  clip-path: polygon(0 18%, 8% 62%, 18% 28%, 28% 20%, 37% 20%, 45% 43%, 50% 100%, 100% 100%, 100% 100%, 0 100%);
+}
+
+.trend-chart svg {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 178px;
+  overflow: visible;
+}
+
+.axis-x {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-mobile-text-secondary);
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.axis-y {
+  position: absolute;
+  left: 0;
+  top: 20px;
+  display: grid;
+  height: 166px;
+  align-content: space-between;
+  color: var(--color-mobile-text-secondary);
+  font-size: 11px;
+}
+
+/* 5. 精准适配的悬浮回到顶部按钮 */
+.float-top {
+  position: fixed;
+  right: max(18px, calc((100vw - 430px) / 2 + 18px));
+  bottom: 86px;
+  z-index: 35;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 14px;
+  color: var(--color-mobile-primary);
+  background: var(--color-mobile-card);
+  box-shadow: var(--quality-shadow);
+}
+

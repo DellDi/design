@@ -2,7 +2,7 @@
 
 本目录用于维护 Tailwind v4 源文件，把 `DESIGN.md` 和 `MOBILE_DESIGN.md` 翻译成可复制、可构建、可约束 AI 输出的样式层。
 
-静态 HTML 设计稿默认不要直接引入本目录文件，应优先使用 `dist/` 中的编译 CSS。
+静态 HTML 设计稿默认不要直接引入本目录文件，应优先使用 Tailwind Play CDN + `dist/` 中的编译 CSS。
 
 ## 文件
 
@@ -35,11 +35,13 @@
 设计素材、截图稿和非工程化页面请使用：
 
 ```html
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <link rel="stylesheet" href="./dist/pc-design.css">
 ```
 
 或：
 
 ```html
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <link rel="stylesheet" href="./dist/mobile-design.css">
 ```

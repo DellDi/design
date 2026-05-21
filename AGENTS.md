@@ -19,10 +19,12 @@
 - 维护移动端 token 时，同时检查 `tokens/mobile-design.tokens.json` 和 `tokens/mobile-design.tokens.css` 是否需要同步。
 - 维护 Tailwind 落地层时，同时检查 `styles/pc-design.tailwind.css`、`styles/mobile-design.tailwind.css` 和 `styles/README.md` 是否需要同步。
 - 维护 Tailwind 源文件后，需要同步重新生成 `dist/pc-design.css` 或 `dist/mobile-design.css`。
-- 大部分产物优先做静态 HTML 设计稿，默认通过 `<link>` 引入 `dist/pc-design.css` 或 `dist/mobile-design.css`。
+- 大部分产物优先做静态 HTML 设计稿，默认同时引入 Tailwind Play CDN 和 `dist/pc-design.css` 或 `dist/mobile-design.css`。
 - 业务资源目录下的 HTML 通常位于 `resources/<端类型>/<业务域>/`，引入根目录 `dist/` 时要使用正确相对路径，例如 `../../../dist/pc-design.css`。
-- 生成 HTML 或原型时，优先使用 `dist/` 编译 CSS 中已有的语义类，Tailwind utility 只用于少量局部微调。
-- 不在 HTML 中临时自创颜色、圆角、阴影和主布局密度。
+- 生成 HTML 或原型时，优先使用 `dist/` 编译 CSS 中已有的语义类；默认语义类无法覆盖时，优先使用 Tailwind utility class 补足布局、间距、状态和响应式。
+- **注意（重要）**：在使用 Tailwind Play CDN（浏览器端实时编译）渲染静态 HTML 时，由于编译器**无法解析外部 CSS 里的 `@theme` 主题扩展**，因此在 HTML 中调用自定义主题 Token 时，**严禁**直接书写非标准 Tailwind 实用类（如 `bg-mobile-card`、`shadow-mobile-card` 或 `text-mobile-primary`）；**必须**使用 Tailwind 任意值并直接映射 CSS 变量（如 `bg-[var(--color-mobile-card)]`、`shadow-[var(--shadow-mobile-card)]`、`text-[var(--color-mobile-primary)]`），以此确保样式在浏览器端能够被正确编译和渲染。
+- 不优先新增内联 `<style>` 或临时 CSS 类；确实需要新增样式时，先判断是否应该沉淀到 `styles/` 和 `dist/`。
+- 不在 HTML 中临时自创品牌颜色、核心圆角、阴影和主布局密度。
 - 变更标准、token、Tailwind 样式、编译 CSS 或提示词模板后，更新 `CHANGELOG.md`。
 - 不把项目初始化为前端应用，除非用户明确要求创建可运行示例或组件库。
 
