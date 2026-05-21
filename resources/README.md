@@ -34,6 +34,7 @@ resources/
   - `index.html`：品质驾驶舱主页面静态原型。
   - `completion-detail.html`：巡检完成情况详情页静态原型。
   - `rectification-detail.html`：整改闭环情况详情页静态原型。
+  - `profile.html`：我的页面静态原型。
   - `quality-cockpit.css`：品质驾驶舱局部样式。
 
 ## 静态 HTML 样式引用

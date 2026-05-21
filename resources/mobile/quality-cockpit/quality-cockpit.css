@@ -34,32 +34,7 @@
   transform: rotate(8deg);
 }
 
-/* 2. 悬浮月份侧边切换 (精密定位计算) */
-.day-switch {
-  position: fixed;
-  top: 214px;
-  z-index: 5;
-  display: grid;
-  place-items: center;
-  width: 44px;
-  min-height: 92px;
-  border-radius: 0 22px 22px 0;
-  color: var(--color-mobile-text-secondary);
-  background: rgba(217, 224, 232, .92);
-  font-size: 14px;
-  line-height: 18px;
-}
-
-.day-switch.right {
-  right: max(0px, calc((100vw - 430px) / 2));
-  border-radius: 22px 0 0 22px;
-}
-
-.day-switch.left {
-  left: max(0px, calc((100vw - 430px) / 2));
-}
-
-/* 3. 聚光灯卡片图形特效 */
+/* 2. 聚光灯卡片图形特效 */
 .spotlight::after {
   content: "";
   position: absolute;
@@ -80,7 +55,7 @@
     linear-gradient(135deg, rgba(120, 94, 255, .22), rgba(120, 94, 255, .54));
 }
 
-/* 4. 折线图背景格栅与剪裁遮罩 */
+/* 3. 折线图背景格栅与剪裁遮罩 */
 .trend-chart {
   position: relative;
   height: 240px;
@@ -124,11 +99,11 @@
   font-size: 11px;
 }
 
-/* 5. 精准适配的悬浮回到顶部按钮 */
+/* 4. 精准适配的悬浮回到顶部按钮 */
 .float-top {
   position: fixed;
   right: max(18px, calc((100vw - 430px) / 2 + 18px));
-  bottom: 86px;
+  bottom: 78px;
   z-index: 35;
   display: grid;
   place-items: center;
@@ -139,4 +114,3 @@
   background: var(--color-mobile-card);
   box-shadow: var(--quality-shadow);
 }
-
