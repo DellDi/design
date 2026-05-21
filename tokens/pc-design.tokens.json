@@ -1,0 +1,93 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "meta": {
+    "name": "PC Design Tokens",
+    "version": "1.0",
+    "source": "../DESIGN.md",
+    "scope": "PC 后台管理 / 门户首页 / 驾驶舱模板 / 数据看板 / 大屏"
+  },
+  "color": {
+    "primary": {
+      "1": { "$value": "#1E80FF", "$type": "color" },
+      "2": { "$value": "#409EFF", "$type": "color" },
+      "3": { "$value": "#D9ECFF", "$type": "color" },
+      "4": { "$value": "#ECF5FF", "$type": "color" }
+    },
+    "success": { "$value": "#67C23A", "$type": "color" },
+    "warning": { "$value": "#E6A23C", "$type": "color" },
+    "danger": { "$value": "#F56C6C", "$type": "color" },
+    "info": { "$value": "#909399", "$type": "color" }
+  },
+  "background": {
+    "page": { "$value": "#F5F7FA", "$type": "color" },
+    "section": { "$value": "#F7F8FA", "$type": "color" },
+    "card": { "$value": "#FFFFFF", "$type": "color" },
+    "hover": { "$value": "#F5F7FA", "$type": "color" },
+    "disabled": { "$value": "#F5F7FA", "$type": "color" }
+  },
+  "border": {
+    "base": { "$value": "#EBEEF5", "$type": "color" },
+    "light": { "$value": "#F0F2F5", "$type": "color" },
+    "dark": { "$value": "#DCDFE6", "$type": "color" }
+  },
+  "text": {
+    "primary": { "$value": "#303133", "$type": "color" },
+    "regular": { "$value": "#606266", "$type": "color" },
+    "secondary": { "$value": "#909399", "$type": "color" },
+    "placeholder": { "$value": "#C0C4CC", "$type": "color" },
+    "disabled": { "$value": "#C8CDD4", "$type": "color" }
+  },
+  "chart": {
+    "blue": { "$value": "#5B8FF9", "$type": "color" },
+    "cyan": { "$value": "#5AD8A6", "$type": "color" },
+    "green": { "$value": "#61DDAA", "$type": "color" },
+    "orange": { "$value": "#F6BD16", "$type": "color" },
+    "red": { "$value": "#E8684A", "$type": "color" },
+    "purple": { "$value": "#9270CA", "$type": "color" }
+  },
+  "screen": {
+    "background": { "$value": "#061326", "$type": "color" },
+    "panel": { "$value": "rgba(10, 27, 58, 0.75)", "$type": "color" },
+    "panelDeep": { "$value": "rgba(7, 18, 40, 0.92)", "$type": "color" },
+    "blue": { "$value": "#2F7BFF", "$type": "color" },
+    "cyan": { "$value": "#4FE3FF", "$type": "color" },
+    "teal": { "$value": "#42D7C5", "$type": "color" },
+    "gold": { "$value": "#F5B84B", "$type": "color" },
+    "green": { "$value": "#4DE58E", "$type": "color" },
+    "textPrimary": { "$value": "#EAF4FF", "$type": "color" },
+    "textSecondary": { "$value": "rgba(234, 244, 255, 0.78)", "$type": "color" },
+    "textWeak": { "$value": "rgba(234, 244, 255, 0.55)", "$type": "color" }
+  },
+  "font": {
+    "family": {
+      "base": {
+        "$value": "PingFang SC, Microsoft YaHei, Helvetica Neue, Arial, sans-serif",
+        "$type": "fontFamily"
+      }
+    }
+  },
+  "radius": {
+    "pcCard": {
+      "$value": "4px",
+      "$type": "dimension"
+    },
+    "pcControl": {
+      "$value": "4px",
+      "$type": "dimension"
+    },
+    "pcPanel": {
+      "$value": "6px",
+      "$type": "dimension"
+    }
+  },
+  "shadow": {
+    "pcCard": {
+      "$value": "0 1px 2px rgb(0 0 0 / 4%)",
+      "$type": "shadow"
+    },
+    "pcPopover": {
+      "$value": "0 8px 24px rgb(0 0 0 / 10%)",
+      "$type": "shadow"
+    }
+  }
+}

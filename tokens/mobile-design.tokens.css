@@ -1,0 +1,27 @@
+:root {
+  --mobile-primary: #1677FF;
+  --mobile-primary-light: #EAF3FF;
+  --mobile-primary-bg: #F0F7FF;
+  --mobile-primary-active: #0F66E8;
+
+  --mobile-bg-page: #F5F7FB;
+  --mobile-bg-card: #FFFFFF;
+  --mobile-bg-card-soft: #F7FAFF;
+  --mobile-border: #EEF2F7;
+
+  --mobile-text-primary: #1F2937;
+  --mobile-text-regular: #4B5563;
+  --mobile-text-secondary: #8A94A6;
+  --mobile-text-weak: #B6C0CF;
+
+  --mobile-success: #22C55E;
+  --mobile-warning: #F59E0B;
+  --mobile-danger: #EF4444;
+
+  --radius-mobile-card: 14px;
+  --radius-mobile-control: 10px;
+  --radius-mobile-pill: 999px;
+
+  --shadow-mobile-card: 0 6px 18px rgb(31 41 55 / 6%);
+  --shadow-mobile-float: 0 10px 28px rgb(22 119 255 / 24%);
+}

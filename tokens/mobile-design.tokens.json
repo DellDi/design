@@ -1,0 +1,103 @@
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "meta": {
+    "name": "Mobile Design Tokens",
+    "version": "1.0",
+    "source": "../MOBILE_DESIGN.md",
+    "scope": "移动端业务应用 / 工单列表 / 工单详情 / 工作台 / 移动驾驶舱 / 图表明细"
+  },
+  "mobile": {
+    "primary": {
+      "$value": "#1677FF",
+      "$type": "color"
+    },
+    "primaryLight": {
+      "$value": "#EAF3FF",
+      "$type": "color"
+    },
+    "primaryBg": {
+      "$value": "#F0F7FF",
+      "$type": "color"
+    },
+    "primaryActive": {
+      "$value": "#0F66E8",
+      "$type": "color"
+    }
+  },
+  "background": {
+    "page": {
+      "$value": "#F5F7FB",
+      "$type": "color"
+    },
+    "card": {
+      "$value": "#FFFFFF",
+      "$type": "color"
+    },
+    "cardSoft": {
+      "$value": "#F7FAFF",
+      "$type": "color"
+    }
+  },
+  "border": {
+    "base": {
+      "$value": "#EEF2F7",
+      "$type": "color"
+    }
+  },
+  "text": {
+    "primary": {
+      "$value": "#1F2937",
+      "$type": "color"
+    },
+    "regular": {
+      "$value": "#4B5563",
+      "$type": "color"
+    },
+    "secondary": {
+      "$value": "#8A94A6",
+      "$type": "color"
+    },
+    "weak": {
+      "$value": "#B6C0CF",
+      "$type": "color"
+    }
+  },
+  "color": {
+    "success": {
+      "$value": "#22C55E",
+      "$type": "color"
+    },
+    "warning": {
+      "$value": "#F59E0B",
+      "$type": "color"
+    },
+    "danger": {
+      "$value": "#EF4444",
+      "$type": "color"
+    }
+  },
+  "radius": {
+    "mobileCard": {
+      "$value": "14px",
+      "$type": "dimension"
+    },
+    "mobileControl": {
+      "$value": "10px",
+      "$type": "dimension"
+    },
+    "mobilePill": {
+      "$value": "999px",
+      "$type": "dimension"
+    }
+  },
+  "shadow": {
+    "mobileCard": {
+      "$value": "0 6px 18px rgb(31 41 55 / 6%)",
+      "$type": "shadow"
+    },
+    "mobileFloat": {
+      "$value": "0 10px 28px rgb(22 119 255 / 24%)",
+      "$type": "shadow"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+:root {
+  --color-primary-1: #1E80FF;
+  --color-primary-2: #409EFF;
+  --color-primary-3: #D9ECFF;
+  --color-primary-4: #ECF5FF;
+
+  --bg-page: #F5F7FA;
+  --bg-section: #F7F8FA;
+  --bg-card: #FFFFFF;
+  --bg-hover: #F5F7FA;
+  --bg-disabled: #F5F7FA;
+
+  --border-color-base: #EBEEF5;
+  --border-color-light: #F0F2F5;
+  --border-color-dark: #DCDFE6;
+
+  --text-primary: #303133;
+  --text-regular: #606266;
+  --text-secondary: #909399;
+  --text-placeholder: #C0C4CC;
+  --text-disabled: #C8CDD4;
+
+  --color-success: #67C23A;
+  --color-warning: #E6A23C;
+  --color-danger: #F56C6C;
+  --color-info: #909399;
+
+  --chart-blue: #5B8FF9;
+  --chart-cyan: #5AD8A6;
+  --chart-green: #61DDAA;
+  --chart-orange: #F6BD16;
+  --chart-red: #E8684A;
+  --chart-purple: #9270CA;
+
+  --screen-bg: #061326;
+  --screen-panel: rgba(10, 27, 58, 0.75);
+  --screen-panel-deep: rgba(7, 18, 40, 0.92);
+  --screen-blue: #2F7BFF;
+  --screen-cyan: #4FE3FF;
+  --screen-teal: #42D7C5;
+  --screen-gold: #F5B84B;
+  --screen-green: #4DE58E;
+  --screen-text-primary: #EAF4FF;
+  --screen-text-secondary: rgba(234, 244, 255, 0.78);
+  --screen-text-weak: rgba(234, 244, 255, 0.55);
+
+  --font-family-base: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+
+  --radius-pc-card: 4px;
+  --radius-pc-control: 4px;
+  --radius-pc-panel: 6px;
+
+  --shadow-pc-card: 0 1px 2px rgb(0 0 0 / 4%);
+  --shadow-pc-popover: 0 8px 24px rgb(0 0 0 / 10%);
+}

@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>驾驶舱模板管理 - 弹窗原型</title>
+  <style>
+    :root {
+      --primary: #1677ff;
+      --primary-soft: #eaf3ff;
+      --page: #f5f7fb;
+      --panel: #ffffff;
+      --line: #e6eaf0;
+      --line-soft: #f0f3f7;
+      --text: #263342;
+      --text-mid: #617083;
+      --text-weak: #9aa6b2;
+      --success: #35b86b;
+      --warning: #f4a62a;
+      --danger: #ee5b5b;
+      --shadow: 0 18px 54px rgba(20, 37, 60, .16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-width: 1280px;
+      color: var(--text);
+      background: var(--page);
+      font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    .page {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(360px, 1fr));
+      gap: 24px;
+      align-items: start;
+      padding: 28px;
+    }
+
+    .modal {
+      border-radius: 10px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .modal.large {
+      grid-column: span 1;
+    }
+
+    .modal-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 54px;
+      padding: 0 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .modal-head strong {
+      font-size: 16px;
+    }
+
+    .modal-close {
+      width: 30px;
+      height: 30px;
+      border: 0;
+      border-radius: 6px;
+      color: var(--text-mid);
+      background: transparent;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .form {
+      padding: 18px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .form-item {
+      display: grid;
+      gap: 7px;
+    }
+
+    .form-item.full {
+      grid-column: 1 / -1;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+      color: var(--text-mid);
+    }
+
+    .check-row input {
+      width: 14px;
+      height: 14px;
+    }
+
+    label {
+      color: var(--text-mid);
+      font-size: 13px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--text);
+      background: #fff;
+      outline: none;
+      font: inherit;
+    }
+
+    input,
+    select {
+      height: 34px;
+      padding: 0 10px;
+    }
+
+    textarea {
+      height: 76px;
+      padding: 9px 10px;
+      resize: none;
+    }
+
+    input[readonly] {
+      color: var(--text-weak);
+      background: #f7f9fc;
+    }
+
+    .tip {
+      color: var(--text-weak);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .snapshot {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fbff;
+    }
+
+    .preview {
+      height: 92px;
+      border: 1px solid #dce6f2;
+      border-radius: 6px;
+      background:
+        linear-gradient(90deg, rgba(22,119,255,.18) 0 30%, transparent 30%),
+        linear-gradient(180deg, #fff, #eef6ff);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .preview::before {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      height: 36px;
+      border-left: 1px solid #cbd7e5;
+      border-bottom: 1px solid #cbd7e5;
+      background: linear-gradient(135deg, transparent 0 22%, #5b8ff9 22% 26%, transparent 26% 48%, #35b86b 48% 52%, transparent 52% 74%, #f4a62a 74% 78%, transparent 78%);
+    }
+
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      height: 24px;
+      padding: 0 8px;
+      border-radius: 12px;
+      color: var(--primary);
+      background: var(--primary-soft);
+      font-size: 12px;
+    }
+
+    .tag.warn {
+      color: #9a6300;
+      background: #fff4dc;
+    }
+
+    .tag.danger {
+      color: var(--danger);
+      background: #fff1f1;
+    }
+
+    .selected-list {
+      display: grid;
+      gap: 8px;
+      max-height: 168px;
+      overflow: auto;
+    }
+
+    .selected-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px;
+      border-radius: 7px;
+      background: #f7f9fc;
+      color: var(--text-mid);
+      font-size: 13px;
+    }
+
+    .selected-item strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .notice {
+      padding: 10px 12px;
+      border-radius: 7px;
+      color: #8a5b00;
+      background: #fff6df;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .modal-foot {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      padding: 12px 18px 16px;
+      border-top: 1px solid var(--line-soft);
+      background: #fbfcfe;
+    }
+
+    button {
+      height: 32px;
+      padding: 0 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: var(--text-mid);
+      background: #fff;
+      font: inherit;
+    }
+
+    .primary {
+      border-color: var(--primary);
+      color: #fff;
+      background: var(--primary);
+    }
+
+    .danger-btn {
+      border-color: var(--danger);
+      color: #fff;
+      background: var(--danger);
+    }
+
+    .danger-btn:disabled {
+      cursor: not-allowed;
+      opacity: .45;
+    }
+
+    .batch-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8fbff;
+    }
+
+    .batch-left,
+    .batch-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .select-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .select-row {
+      display: grid;
+      grid-template-columns: 20px 1fr auto;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 9px 10px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      background: #f7f9fc;
+      color: var(--text-mid);
+      font-size: 13px;
+    }
+
+    .select-row.selected {
+      border-color: #b8d6ff;
+      background: #edf6ff;
+    }
+
+    .select-row.focused {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(22, 119, 255, .14);
+    }
+
+    .select-row strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .fake-check {
+      display: grid;
+      place-items: center;
+      width: 16px;
+      height: 16px;
+      border: 1px solid #b8c4d2;
+      border-radius: 4px;
+      background: #fff;
+      color: #fff;
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .fake-check.checked {
+      border-color: var(--primary);
+      background: var(--primary);
+    }
+
+    .fake-check.indeterminate {
+      border-color: var(--primary);
+      background: var(--primary);
+    }
+
+    .fake-check.checked::before {
+      content: "✓";
+    }
+
+    .fake-check.indeterminate::before {
+      content: "−";
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <section class="modal large">
+      <div class="modal-head">
+        <strong>编辑模板</strong>
+        <button class="modal-close" type="button">×</button>
+      </div>
+      <div class="form">
+        <div class="form-grid">
+          <div class="form-item">
+            <label>模板名称</label>
+            <input value="项目经营总览" />
+          </div>
+          <div class="form-item">
+            <label>终端类型</label>
+            <select>
+              <option>PC</option>
+              <option>移动端</option>
+              <option>数据大屏</option>
+            </select>
+          </div>
+          <div class="form-item full">
+            <label>所属专辑</label>
+            <input readonly value="华南区域 / 核心经营 / 华南经营总览专辑" />
+          </div>
+          <div class="form-item full">
+            <label>模板标签</label>
+            <input value="经营、总览、推荐" />
+            <div class="tip">支持内置枚举与自定义输入混合，保存后用于筛选和搜索。</div>
+          </div>
+          <div class="form-item full">
+            <label>收藏</label>
+            <label class="check-row">
+              <input type="checkbox" checked />
+              加入我的收藏，用于“收藏”筛选
+            </label>
+          </div>
+          <div class="form-item full">
+            <label>模板封面</label>
+            <div class="snapshot">
+              <div class="preview"></div>
+              <div>
+                <div class="status-row">
+                  <span class="tag">快照只读</span>
+                  <span class="tag warn">预览时更新</span>
+                </div>
+                <p class="tip">封面来自模板预览快照，保存模板时不自动刷新，用户不可手动上传或编辑。</p>
+              </div>
+            </div>
+          </div>
+          <div class="form-item full">
+            <label>引用状态</label>
+            <div class="status-row">
+              <span class="tag warn">已被引用</span>
+              <span class="tag danger">禁止删除</span>
+            </div>
+          </div>
+          <div class="form-item full">
+            <label>说明</label>
+            <textarea>用于项目经营指标、收费趋势、项目排名等页面。</textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button>取消</button>
+        <button>预览并更新快照</button>
+        <button>保存为新模板</button>
+        <button class="primary">保存</button>
+      </div>
+    </section>
+
+    <section class="modal">
+      <div class="modal-head">
+        <strong>批量操作</strong>
+        <button class="modal-close" type="button">×</button>
+      </div>
+      <div class="form">
+        <div class="form-grid">
+          <div class="form-item full">
+            <label>已选择模板</label>
+            <div class="selected-list">
+              <div class="selected-item"><strong>项目经营总览</strong><span>已被引用，不可删除</span></div>
+              <div class="selected-item"><strong>欠费预警看板</strong><span>可删除</span></div>
+              <div class="selected-item"><strong>工单响应趋势</strong><span>可删除</span></div>
+            </div>
+          </div>
+          <div class="form-item full">
+            <label>操作类型</label>
+            <select>
+              <option>批量删除</option>
+            </select>
+            <div class="tip">本期仅保留批量删除，不做批量改标签、批量改状态等复杂操作。</div>
+          </div>
+          <div class="form-item full">
+            <div class="notice">系统将自动跳过“已被引用、内置”的模板，只删除允许删除的模板。</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button>取消</button>
+        <button class="danger-btn">确认删除可删除项</button>
+      </div>
+    </section>
+
+    <section class="modal">
+      <div class="modal-head">
+        <strong>复制到当前页面</strong>
+        <button class="modal-close" type="button">×</button>
+      </div>
+      <div class="form">
+        <div class="form-grid">
+          <div class="form-item full">
+            <label>复制对象</label>
+            <input readonly value="模板：项目经营总览" />
+          </div>
+          <div class="form-item full">
+            <label>目标位置</label>
+            <input readonly value="当前分类 / 当前专辑 / 当前页面" />
+            <div class="tip">本期优先支持复制到当前节点，跨节点复制后续迭代。</div>
+          </div>
+          <div class="form-item full">
+            <label>新模板名称</label>
+            <input value="项目经营总览 - 副本" />
+          </div>
+          <div class="form-item full">
+            <label>标签处理</label>
+            <select>
+              <option>沿用原模板标签</option>
+              <option>复制后手动调整</option>
+            </select>
+          </div>
+          <div class="form-item full">
+            <div class="notice">复制后生成新模板记录，封面沿用当前快照；首次预览时可刷新快照。</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button>取消</button>
+        <button class="primary">复制到当前页面</button>
+      </div>
+    </section>
+
+    <section class="modal">
+      <div class="modal-head">
+        <strong>编辑分类树节点</strong>
+        <button class="modal-close" type="button">×</button>
+      </div>
+      <div class="form">
+        <div class="form-grid">
+          <div class="form-item">
+            <label>分类名称</label>
+            <input value="核心经营" />
+          </div>
+          <div class="form-item">
+            <label>上级分类</label>
+            <select>
+              <option>华南区域</option>
+              <option>华东区域</option>
+              <option>华中区域</option>
+              <option>华西区域</option>
+            </select>
+          </div>
+          <div class="form-item">
+            <label>排序</label>
+            <input value="10" />
+          </div>
+          <div class="form-item">
+            <label>节点状态</label>
+            <input readonly value="系统内置节点" />
+          </div>
+          <div class="form-item full">
+            <label>说明</label>
+            <textarea>用于维护左侧分类树。分类节点下挂专辑，模板不直接挂分类。</textarea>
+          </div>
+          <div class="form-item full">
+            <div class="notice">内置字段由系统控制，不在表单中开放编辑。当前节点为内置节点，因此不允许删除。</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button>取消</button>
+        <button class="danger-btn" disabled>删除节点</button>
+        <button class="primary">保存</button>
+      </div>
+    </section>
+
+    <section class="modal">
+      <div class="modal-head">
+        <strong>批量选择状态</strong>
+        <button class="modal-close" type="button">×</button>
+      </div>
+      <div class="form">
+        <div class="form-grid">
+          <div class="form-item full">
+            <label>列表顶部选择条</label>
+            <div class="batch-bar">
+              <div class="batch-left">
+                <span class="fake-check indeterminate"></span>
+                <strong>已选 2 / 5</strong>
+                <span class="tip">半选态：当前页仅部分模板被选中</span>
+              </div>
+              <div class="batch-actions">
+                <button>全选本页</button>
+                <button>反选</button>
+                <button class="danger-btn">批量删除</button>
+              </div>
+            </div>
+          </div>
+          <div class="form-item full">
+            <label>行勾选、选中态、聚焦态</label>
+            <div class="select-list">
+              <div class="select-row selected focused">
+                <span class="fake-check checked"></span>
+                <div><strong>项目经营总览</strong><span>选中 + 聚焦态，键盘 Tab 或鼠标点击后出现蓝色焦点描边</span></div>
+                <span class="tag warn">已被引用</span>
+              </div>
+              <div class="select-row selected">
+                <span class="fake-check checked"></span>
+                <div><strong>欠费预警看板</strong><span>选中态，背景轻蓝</span></div>
+                <span class="tag">可删除</span>
+              </div>
+              <div class="select-row">
+                <span class="fake-check"></span>
+                <div><strong>工单响应趋势</strong><span>未选中态</span></div>
+                <span class="tag">可删除</span>
+              </div>
+              <div class="select-row">
+                <span class="fake-check"></span>
+                <div><strong>设备告警分析</strong><span>未选中态</span></div>
+                <span class="tag warn">已被引用</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-item full">
+            <div class="notice">交互规则：全选只作用于当前页；反选只反转当前页可见模板；批量删除提交时仍需后端校验已被引用和内置模板。</div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button>取消选择</button>
+        <button>反选</button>
+        <button class="danger-btn">批量删除</button>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
