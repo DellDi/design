@@ -25,6 +25,10 @@ resources/
 ## 当前资源
 
 - `pc/cockpit-template-management/`：驾驶舱模板管理相关设计资源。
+  - `README.md`：资源说明和设计口径。
+  - `album-ui.html`：主页面静态原型。
+  - `dialogs.html`：弹窗状态静态原型。
+  - `model-notes.md`：三表模型、标签体系和操作规则说明。
 
 ## 静态 HTML 样式引用
 

@@ -37,6 +37,7 @@
 │   ├── README.md
 │   └── pc
 │       └── cockpit-template-management
+│           ├── README.md
 │           ├── album-ui.html
 │           ├── dialogs.html
 │           └── model-notes.md
