@@ -212,6 +212,78 @@
       background: #fff1f1;
     }
 
+    .tag-picker {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fbfdff;
+    }
+
+    .tag-picker-section {
+      display: grid;
+      gap: 8px;
+    }
+
+    .tag-picker-title {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .tag-chip-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 28px;
+      padding: 0 10px;
+      border: 1px solid #d8e6f7;
+      border-radius: 14px;
+      color: #315d94;
+      background: #f4f8ff;
+      font-size: 12px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .tag-chip.selected {
+      border-color: #8fc1ff;
+      color: var(--primary);
+      background: var(--primary-soft);
+      font-weight: 600;
+    }
+
+    .tag-close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      color: #4f83c2;
+      background: rgba(255, 255, 255, .72);
+      font-size: 12px;
+      line-height: 1;
+    }
+
+    .tag-create-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+    }
+
+    .tag-create-row input {
+      height: 32px;
+      border-radius: 6px;
+    }
+
     .selected-list {
       display: grid;
       gap: 8px;
@@ -394,8 +466,37 @@
           </div>
           <div class="form-item full">
             <label>模板标签</label>
-            <input value="经营、总览、推荐" />
-            <div class="tip">支持内置枚举与自定义输入混合，保存后用于筛选和搜索。</div>
+            <div class="tag-picker">
+              <div class="tag-picker-section">
+                <div class="tag-picker-title">已选择</div>
+                <div class="tag-chip-list">
+                  <span class="tag-chip selected">经营 <span class="tag-close">×</span></span>
+                  <span class="tag-chip selected">总览 <span class="tag-close">×</span></span>
+                  <span class="tag-chip selected">推荐 <span class="tag-close">×</span></span>
+                </div>
+              </div>
+              <div class="tag-picker-section">
+                <div class="tag-picker-title">常用标签</div>
+                <div class="tag-chip-list">
+                  <span class="tag-chip">财务</span>
+                  <span class="tag-chip">工单</span>
+                  <span class="tag-chip">品质</span>
+                  <span class="tag-chip">趋势</span>
+                  <span class="tag-chip">排名</span>
+                  <span class="tag-chip">预警</span>
+                  <span class="tag-chip">最新</span>
+                  <span class="tag-chip">收藏</span>
+                </div>
+              </div>
+              <div class="tag-picker-section">
+                <div class="tag-picker-title">新建标签</div>
+                <div class="tag-create-row">
+                  <input placeholder="输入单个标签名称" />
+                  <button class="btn" type="button">添加标签</button>
+                </div>
+              </div>
+            </div>
+            <div class="tip">选择已有标签，或通过新建标签单独添加，避免手工拼接。</div>
           </div>
           <div class="form-item full">
             <label>收藏</label>

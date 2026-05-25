@@ -701,7 +701,8 @@
 
     .album-foot {
       display: flex;
-      justify-content: space-between;
+      flex-direction: column;
+      gap: 4px;
       margin-top: 10px;
       color: var(--text-weak);
       font-size: 12px;
@@ -1426,9 +1427,9 @@
               </select>
             </div>
             <div class="toolbar-actions">
-              <button class="ghost-btn open-album-modal">新建专辑</button>
+              <button class="ghost-btn open-album-modal" id="toolbarCreateAlbum">新建专辑</button>
               <button class="ghost-btn">批量管理</button>
-              <button class="primary-btn">新建模板</button>
+              <button class="primary-btn" id="toolbarCreateTemplate">新建模板</button>
             </div>
           </div>
 
@@ -1490,7 +1491,7 @@
             <input id="coverUpload" name="coverUpload" type="file" accept="image/*" />
             <div class="form-tip">建议 16:9 图片，未上传时仍按标签匹配默认图。</div>
           </div>
-          <div class="form-item">
+          <div class="form-item hidden" id="builtinAlbumItem">
             <label>内置状态</label>
             <label class="check-row">
               <input id="isBuiltinAlbum" name="isBuiltinAlbum" type="checkbox" />
@@ -1547,13 +1548,13 @@
     ];
 
     const albums = [
-      { id: "a-south-overview", categoryId: "south-core", name: "华南经营总览专辑", desc: "区域经营、项目收入、收缴趋势等模板集合。", tags: ["经营", "总览", "区域"], coverTag: "经营", isBuiltin: true, updatedAt: "2026-05-08" },
-      { id: "a-south-finance", categoryId: "south-core", name: "华南收费分析专辑", desc: "收费、欠费、回款、预算执行相关模板。", tags: ["财务", "收费", "趋势"], coverTag: "财务", isBuiltin: true, updatedAt: "2026-05-01" },
-      { id: "a-south-service", categoryId: "south-service", name: "华南客户服务专辑", desc: "满意度、投诉、服务响应相关模板。", tags: ["工单", "服务", "排名"], coverTag: "工单", isBuiltin: false, updatedAt: "2026-04-28" },
-      { id: "a-east-finance", categoryId: "east-finance", name: "华东财务经营专辑", desc: "收入、成本、预算、利润指标模板。", tags: ["财务", "明细", "预警"], coverTag: "财务", isBuiltin: true, updatedAt: "2026-05-06" },
-      { id: "a-east-device", categoryId: "east-device", name: "华东设备运维专辑", desc: "设备台账、巡检、告警、维保模板集合。", tags: ["设备", "预警", "趋势"], coverTag: "设备", isBuiltin: false, updatedAt: "2026-04-25" },
-      { id: "a-central-workorder", categoryId: "central-workorder", name: "华中工单服务专辑", desc: "工单响应、完成率、超时预警模板集合。", tags: ["工单", "服务", "预警"], coverTag: "工单", isBuiltin: false, updatedAt: "2026-05-07" },
-      { id: "a-west-quality", categoryId: "west-quality", name: "华西品质巡检专辑", desc: "品质检查、整改闭环、区域排名模板集合。", tags: ["品质", "排名", "明细"], coverTag: "品质", isBuiltin: false, updatedAt: "2026-05-03" }
+      { id: "a-south-overview", categoryId: "south-core", name: "华南经营总览专辑", desc: "区域经营、项目收入、收缴趋势等模板集合。", tags: ["经营", "总览", "区域"], coverTag: "经营", isBuiltin: true, updatedAt: "2026-05-08 15:32:18" },
+      { id: "a-south-finance", categoryId: "south-core", name: "华南收费分析专辑", desc: "收费、欠费、回款、预算执行相关模板。", tags: ["财务", "收费", "趋势"], coverTag: "财务", isBuiltin: true, updatedAt: "2026-05-01 10:16:45" },
+      { id: "a-south-service", categoryId: "south-service", name: "华南客户服务专辑", desc: "满意度、投诉、服务响应相关模板。", tags: ["工单", "服务", "排名"], coverTag: "工单", isBuiltin: false, updatedAt: "2026-04-28 17:45:02" },
+      { id: "a-east-finance", categoryId: "east-finance", name: "华东财务经营专辑", desc: "收入、成本、预算、利润指标模板。", tags: ["财务", "明细", "预警"], coverTag: "财务", isBuiltin: true, updatedAt: "2026-05-06 09:20:36" },
+      { id: "a-east-device", categoryId: "east-device", name: "华东设备运维专辑", desc: "设备台账、巡检、告警、维保模板集合。", tags: ["设备", "预警", "趋势"], coverTag: "设备", isBuiltin: false, updatedAt: "2026-04-25 14:08:53" },
+      { id: "a-central-workorder", categoryId: "central-workorder", name: "华中工单服务专辑", desc: "工单响应、完成率、超时预警模板集合。", tags: ["工单", "服务", "预警"], coverTag: "工单", isBuiltin: false, updatedAt: "2026-05-07 11:34:27" },
+      { id: "a-west-quality", categoryId: "west-quality", name: "华西品质巡检专辑", desc: "品质检查、整改闭环、区域排名模板集合。", tags: ["品质", "排名", "明细"], coverTag: "品质", isBuiltin: false, updatedAt: "2026-05-03 16:02:09" }
     ];
 
     const templates = [
@@ -1611,6 +1612,19 @@
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+    }
+
+    function formatDateTime(date) {
+      const pad = value => String(value).padStart(2, "0");
+      return [
+        date.getFullYear(),
+        pad(date.getMonth() + 1),
+        pad(date.getDate())
+      ].join("-") + " " + [
+        pad(date.getHours()),
+        pad(date.getMinutes()),
+        pad(date.getSeconds())
+      ].join(":");
     }
 
     function flatCategories() {
@@ -1908,6 +1922,12 @@
       renderPager("templatePager", templateList.length, templatePage, "template");
     }
 
+    function renderToolbarActions() {
+      const isTemplateView = viewMode === "templates" && currentAlbum;
+      document.getElementById("toolbarCreateAlbum").classList.toggle("hidden", isTemplateView);
+      document.getElementById("toolbarCreateTemplate").classList.toggle("hidden", !isTemplateView);
+    }
+
     function renderInspector() {
       const albumList = currentAlbum ? [currentAlbum] : albumsForCategory();
       const templateList = currentAlbum ? templates.filter(template => template.albumId === currentAlbum.id) : allTemplatesForAlbums(albumList);
@@ -1944,6 +1964,7 @@
       renderChips();
       renderTemplates();
       renderCategoryOptions();
+      renderToolbarActions();
       bindTypeSwitch();
     }
 
@@ -1952,6 +1973,7 @@
       form.reset();
       document.getElementById("albumCategory").value = currentCategory && !currentCategory.isGroup ? currentCategory.id : flatCategories().find(item => !item.isGroup).id;
       document.getElementById("albumTags").value = "经营、总览";
+      document.getElementById("isBuiltinAlbum").checked = false;
       document.getElementById("coverUploadItem").classList.add("hidden");
       document.getElementById("albumModal").classList.remove("hidden");
       setTimeout(() => document.getElementById("albumName").focus(), 0);
@@ -1975,8 +1997,8 @@
         desc: escapeHtml(data.get("albumDesc").trim() || "新建专辑，模板将通过二级下钻进入管理。"),
         tags: tags.length ? tags.map(escapeHtml) : ["自定义"],
         coverTag: tags[0] || "经营",
-        isBuiltin: data.get("isBuiltinAlbum") === "on",
-        updatedAt: new Date().toISOString().slice(0, 10)
+        isBuiltin: false,
+        updatedAt: formatDateTime(new Date())
       };
       albums.unshift(album);
       currentCategory = categoryById(album.categoryId);
